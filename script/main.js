@@ -45,17 +45,34 @@ const team5 = [...players];
 // now when we update it, the original one isn't changed
 
 // The same thing goes for objects, let's say we have a person object
-
 // with Objects
 const person = {
     name: 'Wes Bos',
     age: 80
 };
 
-    // and think we make a copy:
+// and think we make a copy:
+const captain = person; //No hace una copia sino que referencia el uno al otro de manera que uno modifica al otro y viceversa.
 
-    // how do we take a copy instead?
+// how do we take a copy instead?
+const cap2 = Object.assign({}, person, { number: 99 }); //Cogemos un objeto vacío, le metemos todas las propiedades dee un objeto ya creado (en nuestro caso, person), y añadimos nuevas propiedades
+// We will hopefully soon see the object ...spread
+const cap3 = { ...person };
 
-    // We will hopefully soon see the object ...spread
+// Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
 
-    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+const wes = {
+    name: 'Wes',
+    age: 100,
+    social: {
+        twitter: '@wesbos',
+        facebook: 'wesbos.developer'
+    }
+}
+console.log(wes);
+
+const dev = { ...wes }; //Crea una copia del objeto pero no de sus profundidades, de manera que si cambiamos cosas del segundo nivel (social), varían también en el original.
+dev.name = 'Wesley';
+
+const dev2 = JSON.parse(JSON.stringify()); //Esto nos crea copias profundas pero no ees muy recomendable.
+//Lo conviertes en string todo, y luego vuelves a convertirlo en objeto. Es un poco guarrada.
